@@ -1,2 +1,2 @@
-# prj_earthengine_hydroshare
-ongoing work to integrate earthengine funtionality into hydroshare in python language
+# Project Earthengine Hhydroshare
+This is an ongoing work to integrate earthengine funtionality into Hydroshare in Python 3.x language
