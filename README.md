@@ -25,13 +25,14 @@ HOW TO USE THIS REPOSITORY:
 
 
 TODO: 
-Document the Google Drive API - HydroShare integration.
 
-Add more lab sessions.
+-Document the Google Drive API - HydroShare integration.
 
-Develop an example for creation of a HydroShare resource.
+-Add more lab sessions.
 
-Integrate https://github.com/samapriya/geeup in HydroShare for assets upload.
+-Develop an example for creation of a HydroShare resource.
+
+-Integrate https://github.com/samapriya/geeup in HydroShare for assets upload.
 
 
 This work would not be possible without the help and work of the Google Earth Engine Team and Tyler Erickson (https://github.com/tylere), the Google Earth Engine Community (https://github.com/gee-community), the Stack Overflow archives and contributors (https://stackoverflow.com/) and the well documented GEE Python repository of Rosa Aguilar (https://github.com/rosaguilar/geetutorial)
