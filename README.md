@@ -3,11 +3,11 @@ This is an ongoing work to integrate Google EarthEngine (GEE) API funtionality i
 
 ## Objectives of this git repository: 
 ```
-Use HydroShare cloud storage / computing environment to teach remote sensing science under limited local computing capabilities (tablets).
+Use HydroShare to teach remote sensing under limited local computing (tablets).
 
 Investigate ways to do research by combining Google EarthEngine API, Google Drive API, and HydroShare.
 
-Bring into Python language available GEE JavaScript examples.
+Bring into Python language available online GEE JavaScript/Python examples.
 ```
 
 This is a funtional "alpha" version of the repository (April 2019). I consider it "alpha" because it has not been tested on another HydroShare/EarthEngine account (validation needed). 
