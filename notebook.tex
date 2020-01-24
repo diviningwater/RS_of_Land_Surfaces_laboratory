@@ -141,7 +141,7 @@
     \def\gt{>}
     \def\lt{<}
     % Document parameters
-    \title{0 Git commands for HydroShare}
+    \title{1 Google Earth Engine installation in HydroShare}
     
     
     
@@ -280,12 +280,14 @@
     
 
     
-    \hypertarget{git-commands-for-hydroshare-jupyter}{%
-\section{Git commands for Hydroshare
-Jupyter:}\label{git-commands-for-hydroshare-jupyter}}
+    \hypertarget{google-earth-engine-installation-in-hydroshare}{%
+\subsection{Google Earth Engine Installation In
+HydroShare}\label{google-earth-engine-installation-in-hydroshare}}
+
+adapted from https://github.com/rosaguilar/geetutorial
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}9}]:} \PY{k+kn}{from} \PY{n+nn}{datetime} \PY{k}{import} \PY{n}{date}
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k+kn}{from} \PY{n+nn}{datetime} \PY{k}{import} \PY{n}{date}
         \PY{n}{today} \PY{o}{=} \PY{n}{date}\PY{o}{.}\PY{n}{today}\PY{p}{(}\PY{p}{)}
         \PY{n}{d2} \PY{o}{=} \PY{n}{today}\PY{o}{.}\PY{n}{strftime}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{B }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{, }\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{Y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Updated by Alfonso Torres\PYZhy{}Rua, }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{d2}\PY{p}{)}
@@ -297,33 +299,37 @@ Updated by Alfonso Torres-Rua,  January 24, 2020
 
     \end{Verbatim}
 
-    A live document of my experience with git and Hydroshare. Derived from
-https://www.linux.com/learn/beginning-git-and-github-linux-users
+    This tutorial includes basic operations that can be executed using the
+Pyhton API of Google Earth Engine (GEE) on HydroShare. GEE is a cloud
+platform to perform large scale analysis on Earth science data.
 
-\hypertarget{main-pointlesson}{%
-\subsection{Main point/lesson:}\label{main-pointlesson}}
+    \hypertarget{google-earth-engine-registration}{%
+\subsection{Google Earth Engine
+registration}\label{google-earth-engine-registration}}
 
-It is important to be organized when developing code. The main tasks are
-cloud repository setting, clonning, and commiting files to cloud
-repository.
+    Before the installation, you should sign up in GEE. This can be done in:
+https://signup.earthengine.google.com.
 
-So, for any project or a class series of homeworks, start a project in
-GitHub and then clone it to Hydroshare
+    \hypertarget{hydroshare-python-modules-installation}{%
+\subsection{Hydroshare python modules
+installation}\label{hydroshare-python-modules-installation}}
 
-    \hypertarget{creating-a-github-account}{%
-\subsection{1. Creating a GitHub
-account:}\label{creating-a-github-account}}
+We will use python 3.5 or higher and pip.
 
-Go to https://github.com/ and create an account. It is free.
-
-    \hypertarget{create-a-git-repository}{%
-\subsection{2. Create a git repository:}\label{create-a-git-repository}}
-
-Click on the \textbf{NEW} (green button in your GitHub account.
+In a terminal console, execute the following steps:
+pip install google-api-python-client --quiet
+pip install oauth2client --quiet
+pip install pyCrypto --quiet
+pip install earthengine-api --quiet
+ls
+    then lets pass the following command:
+earthengine authenticate
+    The above instructions will open a browser and request to sign using
+your google account (if you are not already signed).
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}10}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{html}
-         \PYZlt{}img src=\PYZsq{}0 Git commands/picture0.PNG\PYZsq{}, width=700, height=200\PYZgt{}
+{\color{incolor}In [{\color{incolor}7}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{html}
+        \PYZlt{}img src=\PYZsq{}0 Git commands/picture1\PYZus{}0.png\PYZsq{}, width=800, height=300\PYZgt{}
 \end{Verbatim}
 
 
@@ -333,175 +339,48 @@ Click on the \textbf{NEW} (green button in your GitHub account.
     \end{verbatim}
 
     
-    In continuation:
+    Copy the link (https:\ldots{}.) presented in the terminal and paste it
+in a web browser. GEE will ask for permission to access your profile.
+Accept it.
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  Give it a name (I am calling it playground)
-\item
-  Choose private (only you have the access or public.
-\item
-  Check the"Initialize this repository with a README (the README is
-  where an explanation about the repository is placed)
-\item
-  In the Add.gitignore select the programming language (I chose Python)
-\item
-  In the add.license select None or an open or close license.
-\item
-  Click ``Create Repository''
-\end{enumerate}
+    After giving permission, GEE will provide a token, like this:
+Xt2hgyjklnvvkd
+    Copy the token and paste in the terminal. Hydroshare will save this
+token and you can start to use GEE python API.
+
+    This authentication process creates a credential file located typically
+in: \username.config\earthengine</i>
+
+This credential is related to the specific google account used during
+login.
+
+    \hypertarget{testing-your-installation}{%
+\subsubsection{Testing your
+installation}\label{testing-your-installation}}
+
+    In a new notebook file, copy and paste the following code:
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}11}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{html}
-         \PYZlt{}img src=\PYZsq{}0 Git commands/picture1.png\PYZsq{}, width=700, height=200\PYZgt{}
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}Import the Earth Engine Python Package}
+        \PY{k+kn}{import} \PY{n+nn}{ee}
+        \PY{c+c1}{\PYZsh{}Initialize the Earth Engine object}
+        \PY{n}{ee}\PY{o}{.}\PY{n}{Initialize}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}Print the information for an image asset.}
+        \PY{n}{image} \PY{o}{=} \PY{n}{ee}\PY{o}{.}\PY{n}{Image}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{srtm90\PYZus{}v4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{image}\PY{o}{.}\PY{n}{getInfo}\PY{p}{(}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
 
-    
-    \begin{verbatim}
-<IPython.core.display.HTML object>
-    \end{verbatim}
-
-    
-    In the next screen, you can still modify the README.md using the pen
-icon
-
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}12}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{html}
-         \PYZlt{}img src=\PYZsq{}0 Git commands/picture2.png\PYZsq{}, width=700, height=200\PYZgt{}
-\end{Verbatim}
+\{'type': 'Image', 'bands': [\{'id': 'elevation', 'data\_type': \{'type': 'PixelType', 'precision': 'int', 'min': -32768, 'max': 32767\}, 'dimensions': [432000, 144000], 'crs': 'EPSG:4326', 'crs\_transform': [0.000833333333333, 0, -180, 0, -0.000833333333333, 60]\}], 'version': 1494271934303000.0, 'id': 'srtm90\_v4', 'properties': \{'system:time\_start': 950227200000, 'system:time\_end': 951177600000, 'system:asset\_size': 18827626666\}\}
 
+    \end{Verbatim}
 
-    
-    \begin{verbatim}
-<IPython.core.display.HTML object>
-    \end{verbatim}
+    The above command should produce an output like this:
+{'type': 'Image', 'bands': [{'id': 'elevation', 'data_type': {'type': 'PixelType', 'precision': 'int', 'min': -32768, 'max': 32767}, 'dimensions': [432000, 144000], 'crs': 'EPSG:4326', 'crs_transform': [0.000833333333333, 0.0, -180.0, 0.0, -0.000833333333333, 60.0]}], 'version': 1494271934303000, 'id': 'srtm90_v4', 'properties': {'system:time_start': 950227200000, 'system:time_end': 951177600000, 'system:asset_size': 18827626666}}
 
-    
-    \hypertarget{fork-a-github-repository-to-your-account}{%
-\subsection{3. Fork a Github repository to your
-account:}\label{fork-a-github-repository-to-your-account}}
+    If the results are the same, then you are set!
 
-First, we have to find a repository to ``fork'', to copy it to your
-Github account. For example, let's fork the repository
-openet-ssebop-beta. You can look for it in the search box and click on
-``All Github'':
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}13}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{html}
-         \PYZlt{}img src=\PYZsq{}0 Git commands/picture3.png\PYZsq{}, width=700, height=200\PYZgt{}
-\end{Verbatim}
-
-
-    
-    \begin{verbatim}
-<IPython.core.display.HTML object>
-    \end{verbatim}
-
-    
-    Click on Fork:
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}14}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{html}
-         \PYZlt{}img src=\PYZsq{}0 Git commands/picture4.png\PYZsq{}, width=700, height=200\PYZgt{}
-\end{Verbatim}
-
-
-    
-    \begin{verbatim}
-<IPython.core.display.HTML object>
-    \end{verbatim}
-
-    
-    Why we fork: When we have to modify the files and sync the changes to
-our Github account without needing permission from repository owner. Now
-you can ``clone'' it to Hydroshare.
-
-    \hypertarget{cloning-github-repository-to-hydroshare}{%
-\subsection{4. Cloning Github repository to
-Hydroshare}\label{cloning-github-repository-to-hydroshare}}
-
-    You can clone your own or forked repositories to Hydroshare. Clone means
-create a copy somewhere else from Github (local computer or the cloud)
-while keeping a link to Github for syncronization and changes tracking.
-
-To clone we need to create a location where to clone files. I recommend
-creating a folder.
-
-Go back to HydroShare, and:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Open Jupyter Notebooks,
-\item
-  Go to Jupyter notebooks view (click on File then Open)
-\item
-  Create a git repo folder (I call mine git-repos) using these terminal
-  commands if there is none previously and navigate to it.
-\end{enumerate}
-#open terminal
-# navigate to notebooks and type the two commands below:
-
-mkdir git-repos
-
-cd git-repos
-    \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{3}
-\tightlist
-\item
-  In the same terminal clone the repository by clicking in the Github
-  green button (which shows a web address like this
-  https://github.com/torresrua/playground.git ) and then typing in the
-  terminal the following command:
-\end{enumerate}
-git clone https://github.com/torresrua/playground.git
-    \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{4}
-\tightlist
-\item
-  pass the command below in the terminal to see the files in the local
-  version of the repository
-\end{enumerate}
-ls playground/
-    \hypertarget{adding-files-to-a-local-cloned-git-repository}{%
-\subsection{5. Adding files to a local (cloned) git
-repository}\label{adding-files-to-a-local-cloned-git-repository}}
-
-When new files were added to the cloned repo in Jupyter, we need to tell
-git to track them. Every time you finish working on notebooks, go to a
-terminal, navigate to the local repo folder and:
-git add *
-    \hypertarget{removing-files-from-a-local-cloned-git-repository}{%
-\subsection{6. Removing files from a local (cloned) git
-repository}\label{removing-files-from-a-local-cloned-git-repository}}
-
-When files are deleted in the cloned repo, we need to tell git to
-un-track them. So navigate through a terminal to the local repo folder
-and:
-git add -u
-    \hypertarget{committing-and-pushing-files-to-cloud-git-repository-github}{%
-\subsection{7. Committing and Pushing files to cloud git repository
-(Github)}\label{committing-and-pushing-files-to-cloud-git-repository-github}}
-
-If you are like me who does not know how many files were changed, from a
-terminal, navigate to the local repo folder and follow these two
-foolprof commands:
-git commit -a
-    then
-git push origin master
-    \hypertarget{pulling-files-from-cloud-git-repository-github}{%
-\subsection{8. Pulling files from cloud git repository
-(Github)}\label{pulling-files-from-cloud-git-repository-github}}
-
-If new version of files (or new files were added) are available from
-GitHub, or when you are working with collaborators in a Github
-repository, from a terminal, navigate to the local repo and type:
-git pull origin master
 
     % Add a bibliography block to the postdoc
     
