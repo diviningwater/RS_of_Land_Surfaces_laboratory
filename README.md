@@ -26,13 +26,13 @@ Suggestions, collaboration, and questions are more than welcome!
 
 TODO: 
 
-* Document the Google Drive API - HydroShare integration.
+DONE * Document the Google Drive API - HydroShare integration.
 
 * Add more lab sessions.
 
-* Develop an example for creation of a HydroShare resource.
+DONE * Develop an example for creation of a HydroShare resource.
 
- * Integrate https://github.com/samapriya/geeup in HydroShare for assets upload.
+ DONE * Integrate https://github.com/samapriya/geeup in HydroShare for assets upload.
 
 
 This work would not be possible without the help and work of the Google Earth Engine Team and Tyler Erickson (https://github.com/tylere), the Google Earth Engine Community (https://github.com/gee-community), the Stack Overflow archives and contributors (https://stackoverflow.com/) and the well documented GEE Python repository of Rosa Aguilar (https://github.com/rosaguilar/geetutorial)
