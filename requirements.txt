@@ -229,7 +229,7 @@ traittypes==0.2.1
 typing==3.6.4
 ulmo==0.8.5
 uritemplate==3.0.1
-urllib3==1.22
+urllib3==1.24.2
 vincent==0.4.4
 vine==1.1.4
 wcwidth==0.1.7
