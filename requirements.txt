@@ -153,7 +153,7 @@ ply==3.11
 prometheus-client==0.6.0
 prompt-toolkit==1.0.15
 protobuf==3.5.2
-psutil==5.4.5
+psutil==5.6.6
 psycopg2==2.6.2
 ptyprocess==0.5.2
 py==1.5.3
