@@ -1,0 +1,179 @@
+//***************** MASK CLOUDS, Add NDVI **************************
+// Function to cloud mask Landsat 8.
+function maskL7sr(image) {
+  // Bits 3 and 5 are cloud shadow and cloud, respectively.
+  var cloudShadowBitMask = (1 << 3);
+  var cloudsBitMask = (1 << 5);
+  // Get the pixel QA band.
+  var qa = image.select('pixel_qa');
+  // Both flags should be set to zero, indicating clear conditions.
+  var mask = qa.bitwiseAnd(cloudShadowBitMask).eq(0)
+                 .and(qa.bitwiseAnd(cloudsBitMask).eq(0));
+  return image.updateMask(mask);
+}
+
+// NDVI Functions for L8 and L7 (the L7 function is used for L4&5)
+var addNDVIL7 = function(image) {
+  var ndvi = image.normalizedDifference(['B4', 'B3']).rename('NDVI');
+  return image.addBands(ndvi);
+};
+
+//EVI Function
+var addEVIL7 = function(image) {
+  var evi = image.expression('2.5 * ((NIR - RED) / (NIR + 6 * RED - 7.5 * BLUE + 1))', {
+      'NIR': image.select('B5'),
+      'RED': image.select('B4'),
+      'BLUE': image.select('B2')}).rename("EVI");
+  return image.addBands(evi);
+};
+
+//*******************************************************
+
+// Identify a region to map
+var fc =ee.Geometry.Rectangle([-113.129, 36.552, -111.626, 39.138]); // Utah, Central Strip
+
+
+// Load a Landsat 7 ImageCollection.  Mask clouds and add NDVI.
+var landsat = ee.ImageCollection('LANDSAT/LE07/C01/T1_SR')
+  .filterDate('2000-01', '2019-12')
+  .map(maskL7sr).map(addNDVIL7).filterBounds(fc);
+
+var landsat2 = ee.ImageCollection('LANDSAT/LE07/C01/T1_SR')
+  .filterDate('2000-01', '2019-12')
+  .map(maskL7sr).map(addEVIL7).filterBounds(fc);
+  
+//Specify the years to map  (L8 runs from April 2013 through the present)
+var Years = ee.List.sequence(2000, 2019);
+var ndviViz = {min: 0.5, max: 80, palette: ['#FF0000','FFFFFF', '#00FF00']};
+// NDVI: Group by year, and reduce within groups by max();
+// the result is an ImageCollection with one image for each year.
+var MaxNDVIbyYear = ee.ImageCollection.fromImages(
+      Years.map(function (Y) {
+        return landsat.filter(ee.Filter.calendarRange(Y, Y, 'year'))
+                    .select('NDVI').max()
+                    .set('year', Y);
+}));
+print(MaxNDVIbyYear);
+var MaxNDVI = MaxNDVIbyYear.filterMetadata('year','equals',2019).mean().multiply(100)
+print(MaxNDVI)
+var ndviViz = {min: 0.5, max: 80, palette: ['#FF0000','FFFFFF', '#00FF00']};
+Map.addLayer(MaxNDVI,ndviViz,'ndvi')
+
+//EVI: Group by Year, and reduce within groups by max()
+
+var MaxEVIbyYear = ee.ImageCollection.fromImages(
+      Years.map(function (Y) {
+        return landsat2.filter(ee.Filter.calendarRange(Y, Y, 'year'))
+                    .select('EVI').max()
+                    .set('year', Y);
+}));
+print(MaxEVIbyYear)
+
+// Extract from the NDVI and LST yearly image composites the year that I want to compare against the norm
+//  In this case, I have to convert the collection into a single image.  Since there's only one image in the collection,
+//  the mean value will do it, but it does not change the values since n=1.  Data are scaled the same as before
+var MaxNDVI = MaxNDVIbyYear.filterMetadata('year','equals',2007).mean().multiply(100)
+var MaxEVI = MaxEVIbyYear.filterMetadata('year','equals',2009).mean()
+
+//Add fire perimeter for Puma Fire
+
+var fires = ee.FeatureCollection("users/lisamholsinger/dnbr_severity/fires");
+print(fires)
+
+// specify fire severity metrics to create
+var bandList = ['dnbr', 'dnbr_w_offset','rbr', 'rbr_w_offset','rdnbr', 'rdnbr_w_offset'];
+
+// Enter beginning and end days for imagery season as julian dates
+var startday = 91;
+var endday   = 181;
+
+//  visualize fire perimeters
+Map.addLayer(fires, {color: 'Blue'}, "Fire perimeters");
+
+//Plot polygons of fire affected and non-fire affected 
+
+var Plot1 = ee.Feature(    // Fire.
+  ee.Geometry.Polygon([
+    [-112.2835876457093,37.500545639840404],
+    [-112.28350181502083,37.49863899565549],
+    [-112.28084106367805,37.49877518614036],
+    [-112.28109855574348,37.500545639840404],
+    [-112.2835876457093,37.500545639840404]]),
+  {label: 'Fire'});
+var Plot2 = ee.Feature(  // Non-fire.
+  ee.Geometry.Polygon([
+    [-112.30796356123665,37.50204368326037],
+    [-112.30796356123665,37.50000088932681],
+    [-112.30538864058235,37.499864701077435],
+    [-112.30513114851692,37.50224795957982],
+    [-112.30796356123665,37.50204368326037]]),
+  {label: 'Nonfire'});
+
+var Plots = new ee.FeatureCollection([Plot1, Plot2]);
+var COLOR = {
+  Plot1: '00FF00',
+  Plot2: '000000',
+};
+
+
+//NDVI
+
+var ndvimaxTimeSeries = ui.Chart.image.seriesByRegion({
+  imageCollection: MaxNDVIbyYear,
+  regions: Plots,
+  reducer: ee.Reducer.mean(),
+  band: 'NDVI',
+  scale: 200,
+  xProperty: 'year',
+  seriesProperty: 'label'
+});
+ndvimaxTimeSeries.setChartType('ScatterChart');
+ndvimaxTimeSeries.setOptions({
+  title: 'Annual NDVI MAX over time',
+  hAxis: {
+    title: 'Year'
+  },
+  vAxis: {
+    title: 'NDVI MAX'
+  },
+  lineWidth: 1,
+  pointSize: 4,
+  series: {
+    1: {color: COLOR.Plot1},
+    2: {color: COLOR.Plot2},
+  }
+});
+
+print(ndvimaxTimeSeries);
+
+
+
+//EVI
+
+var evimaxTimeSeries = ui.Chart.image.seriesByRegion({
+  imageCollection: MaxEVIbyYear,
+  regions: Plots,
+  reducer: ee.Reducer.mean(),
+  band: 'EVI',
+  scale: 20,
+  xProperty: 'year',
+  seriesProperty: 'label'
+});
+evimaxTimeSeries.setChartType('ScatterChart');
+evimaxTimeSeries.setOptions({
+  title: 'Annual EVI MAX over time',
+  hAxis: {
+    title: 'Year'
+  },
+  vAxis: {
+    title: 'EVI MAX'
+  },
+  lineWidth: 1,
+  pointSize: 4,
+  series: {
+    1: {color: COLOR.Plot1},
+    2: {color: COLOR.Plot2},
+  }
+});
+
+print(evimaxTimeSeries);
