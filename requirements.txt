@@ -72,7 +72,7 @@ heapdict==1.0.0
 holoviews==1.10.4
 hs-restclient==1.2.12
 html5lib==0.9999999
-httplib2==0.17.3
+httplib2==0.18.0
 httplib2shim==0.0.3
 idna==2.6
 imageio==2.3.0
