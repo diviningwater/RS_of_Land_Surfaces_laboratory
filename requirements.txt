@@ -34,7 +34,7 @@ cligj==0.5.0
 cloudpickle==0.5.3
 conda==4.8.3
 conda-package-handling==1.6.0
-cryptography==2.6.1
+cryptography==3.2
 cybergis==0.1.0
 cycler==0.10.0
 Cython==0.28.3
