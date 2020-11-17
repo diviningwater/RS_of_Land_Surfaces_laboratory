@@ -6,39 +6,27 @@ This is an ongoing work to integrate Google EarthEngine (GEE) API funtionality i
 
 ### Objectives of this git repository: 
 
-* Use HydroShare to teach remote sensing under limited local computing (clour resources).
+* Use HydroShare to teach remote sensing under limited local computing (cloud resources).
 
 * Investigate ways to do research by combining Google EarthEngine API, Google Drive API, and HydroShare.
 
 * Bring into Python language available online GEE JavaScript/Python examples.
 
 ### Current operational status:
-This is a funtional "beta" version of the repository (April 2020).  
+This is a funtional version of the repository (April 2020).  
 
-### HOW TO USE THIS REPOSITORY:
+### How to use this repository:
+1. Open an account in HydroShare https://www.hydroshare.org/ It is free.
+2. in your Hydroshare account, select the "CUAHSI JupyterHub" app and follow instructions.
+3. In server options, select "Python 3.7 Scientific" and continue.
+4. Once in JupyterLab, launch a terminal and pass the following command (copy and paste):
 
-* If not done already, register for an Google Earth Engine account (free) here https://signup.earthengine.google.com/#!/
+git clone https://github.com/torresrua/prj_earthengine_hydroshare.git
 
-* Clone this repository into Hydroshare. The notebook "0 Git commands for HydroShare.ipynb" in this repository gives necessary information to do this.
-
-* Follow the steps in the notebook "1 Google Earth Engine installation in HydroShare.ipynb" for installation of EarthEngine Python API in HydroShare.
-
-* Open the "2 Using Earth Engine in HydroShare.ipynb" notebook and follow the instructions for additional necessary modules.
-
-* That's it! You can run with the lab notebooks. Come back frequently, for updates, new labs, and and improvements.
-
-TODO: 
-
-DONE * Document the Google Drive API - HydroShare integration.
-
-* Add more lab sessions.
-
-DONE * Develop an example for creation of a HydroShare resource.
-
- DONE * Integrate https://github.com/samapriya/geeup in HydroShare for assets upload.
+5. This repository files will appear in JupyterLab FileBrowser. You can start running the notebooks included in this repository.
 
 
-
+CUASHI JupyterHub "Python 3.7 Scientific"  Server option has been tested to be compatible with Qiusheng Wu's GEEMAP tools https://github.com/giswqs/geemap . This repository takes advantage of GEEMAP python implementation. 
 
 
 
