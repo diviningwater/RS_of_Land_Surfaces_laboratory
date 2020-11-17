@@ -16,16 +16,20 @@ This is an ongoing work to integrate Google EarthEngine (GEE) API funtionality i
 This is a funtional version of the repository (April 2020).  
 
 ### How to use this repository:
-1. Open an account in HydroShare https://www.hydroshare.org/ It is free.
-2. in your Hydroshare account, select the "CUAHSI JupyterHub" app and follow instructions.
-3. In server options, select "Python 3.7 Scientific" and continue.
-4. Once in JupyterLab, launch a terminal and pass the following command (copy and paste):
+1. Open an account in Google Earth Engine https://earthengine.google.com/. It is free.
+2. Open an account in HydroShare https://www.hydroshare.org/ It is free.
+3. In your Hydroshare account, select the "CUAHSI JupyterHub" app and follow instructions.
+4. In server options, select "Python 3.7 Scientific" and continue.
+5. Once in JupyterLab, launch a terminal and pass the following command (copy and paste):
 
 git clone https://github.com/torresrua/prj_earthengine_hydroshare.git
 
-5. This repository files will appear in JupyterLab FileBrowser. You can start running the notebooks included in this repository.
+6. This repository files will appear in JupyterLab FileBrowser. 
+7. Open notebook "Installing Google Earth Engine In HydroShare.ipynb" and follow instructions. You have to do this just the first time.
+8. You can start running the notebooks included in this repository.
 
 
+### NOTE
 CUASHI JupyterHub "Python 3.7 Scientific"  Server option has been tested to be compatible with Qiusheng Wu's GEEMAP tools https://github.com/giswqs/geemap . This repository takes advantage of GEEMAP python implementation. 
 
 
