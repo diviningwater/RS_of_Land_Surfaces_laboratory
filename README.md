@@ -19,7 +19,7 @@ This is a funtional version of the repository (April 2020).
 1. Open an account in Google Earth Engine https://earthengine.google.com/. It is free.
 2. Open an account in HydroShare https://www.hydroshare.org/ It is free.
 3. In your Hydroshare account, select the "CUAHSI JupyterHub" app and follow instructions.
-4. In server options, select "Python 3.7 Scientific" and continue.
+4. In server options, select "Python 3.x Scientific" and continue.
 5. Once in JupyterLab, launch a terminal and pass the following command (copy and paste):
 
 git clone https://github.com/torresrua/prj_earthengine_hydroshare.git
@@ -30,7 +30,7 @@ git clone https://github.com/torresrua/prj_earthengine_hydroshare.git
 
 
 ### NOTE
-CUASHI JupyterHub "Python 3.7 Scientific"  Server option has been tested to be compatible with Qiusheng Wu's GEEMAP tools https://github.com/giswqs/geemap . This repository takes advantage of GEEMAP python implementation. 
+CUASHI JupyterHub "Python 3.x Scientific"  Server option has been tested to be compatible with Qiusheng Wu's GEEMAP tools https://github.com/giswqs/geemap . This repository takes advantage of GEEMAP python implementation. 
 
 
 
