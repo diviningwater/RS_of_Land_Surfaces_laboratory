@@ -1,7 +1,7 @@
 <p align="center">
   <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/python-3.6%20|%203.7|%203.8-brightgreen.svg" alt="Python supported"></a>
  
-# CEE5003_RS_of_Land_Surfaces_lab_material
+# RS_of_Land_Surfaces_laboratory
 This is a series of Jupyter notebooks that integrate Google EarthEngine (GEE) API funtionality into HydroShare in Python 3.x language for the Utah State University CEE/PSC/WATS 5003/6003 Remote Sensing of Land Surfaces Spring class. 
 
 ### Objectives of this git repository: 
