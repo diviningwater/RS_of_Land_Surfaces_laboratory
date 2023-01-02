@@ -22,7 +22,7 @@ This is a funtional version of the repository (April 2020).
 4. In server options, select "Python 3.x Scientific" and continue.
 5. Once in JupyterLab, launch a terminal and pass the following command (copy and paste):
 
-git clone https://github.com/torresrua/prj_earthengine_hydroshare.git
+git clone https://github.com/torresrua/CEE5003_RS_of_Land_Surfaces_lab_material.git
 
 6. This repository files will appear in JupyterLab FileBrowser. 
 7. Open notebook "Installing Google Earth Engine In HydroShare.ipynb" and follow instructions. You have to do this just the first time.
